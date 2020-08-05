@@ -4,6 +4,11 @@
 <div class="row">
 <div class="col-3">
 <h4><%= @user.username %></h4>
+<% if current_user.id == @user.id %>
+<%= link_to "Edit Bio", edit_user_path(current_user), class: "btn btn-warning" %>
+<% end %>
+<p><em><%= @user.biography %></em></p>
+
 
 <h6>Following</h6>
 <ul>

@@ -1,0 +1,7 @@
+<%= form_for [@user] do |f| %>
+  <div class="form-row">
+    <%= f.label :biography, "Biography" %>
+    <%= f.text_field :biography, :size=>"50"%>
+  </div>
+  <%= f.submit "Save Changes" %>
+<% end %>
