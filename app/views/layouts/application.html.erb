@@ -12,14 +12,14 @@
   <body>
   <%# START NAVBAR %>
     <nav class="navbar navbar-left navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">RailsInstagram</a>
+    <%= link_to "RailsInstagram", posts_index_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ml-auto">
-        <a class="nav-item nav-link" href="#">Home</a>
-        <a class="nav-item nav-link" href="#">Profile</a>
+        <%= link_to "Home", posts_index_path, class: "nav-item nav-link" %>
+        <%= link_to "Profile", user_path(current_user), class: "nav-item nav-link" %>
 
         <% if user_signed_in? %>
           <%# current_user.avatar %>
