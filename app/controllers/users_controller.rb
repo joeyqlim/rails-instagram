@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   def index
     @users = User.all
+    @follow_list = current_user.followships.pluck(:following_id)
   end
 
   def show
