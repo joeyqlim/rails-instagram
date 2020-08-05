@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :followships
+  devise_for :users
+  
   get 'comments/index'
   get 'comments/show'
   get 'comments/new'
@@ -6,7 +9,7 @@ Rails.application.routes.draw do
   get 'comments/edit'
   get 'comments/update'
   get 'comments/destroy'
-  devise_for :users
+
 
   get 'posts/index'
   get 'posts/create'
