@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     @post = @user.posts.build(post_params)
 
     if @post.save
-      redirect_to user_path(@user)
+      redirect_to user_posts_path(@user)
     else
       render :new
     end
@@ -44,6 +44,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :user_id)
+    params.require(:post).permit(:content, :user_id, :main_image)
   end 
 end
