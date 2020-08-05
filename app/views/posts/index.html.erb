@@ -1,7 +1,8 @@
 <h1>Posts#index</h1>
 <p>Find me in app/views/posts/index.html.erb</p>
+<div class="row d-flex flex-wrap">
 <% @posts.each do |p| %>
-  <div class="border col-4 p-2 mx-auto text-center">
+  <div class="border col-4 p-2 mx-1 text-center">
     <%= image_tag p.main_image.variant(resize_to_limit: [250, 250]) %>
     <div class="d-block">
     <p>"<%= p.content %>"</p>
@@ -9,3 +10,4 @@
   </div>
   </div>
 <% end %>
+</div>
