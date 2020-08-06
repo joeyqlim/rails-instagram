@@ -1,9 +1,15 @@
 <h1>Posts#show</h1>
 <p>Find me in app/views/posts/show.html.erb</p>
+
 <div class="container">
   <div class="col-md-6">
     <%= image_tag @post.main_image.variant(resize_to_limit: [500, 500]) %>
     <p>"<%= @post.content %>"</p>
+
+    <% @post.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
+    
   </div>
   <div class="col-md-6">
     <div>
