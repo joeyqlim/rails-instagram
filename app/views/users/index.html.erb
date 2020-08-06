@@ -1,16 +1,17 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
-<% @users.each do |user| %>
-  <% if current_user.id != user.id %>
-    <% if current_user.followships.length == 0 %>
-        <p><%= link_to user.username, user_path(user.id) %> 
-              <%= link_to "Follow", followships_path(:following_id => user), :method => :post %></p>
-    <% else %>
-      <% if @follow_list.include? user.id %>
-        <p><%= link_to user.username, user_path(user.id) %> <%= link_to "Unfollow", @followships.where(:user_id => current_user.id, :following_id => user).first, :method => :delete  %></p>
+<h2>Users</h2>
+<ul>
+  <% @users.each do |user| %>
+    <% if current_user.id != user.id %>
+      <% if current_user.followships.length == 0 %>
+          <li><%= link_to user.username, user_path(user.id) %> 
+                <%= link_to "Follow", followships_path(:following_id => user), :method => :post %></li>
       <% else %>
-        <p><%= link_to user.username, user_path(user.id) %> <%= link_to "Follow", followships_path(:following_id => user), :method => :post %></p>
+        <% if @follow_list.include? user.id %>
+          <li><%= link_to user.username, user_path(user.id) %> <%= link_to "Unfollow", @followships.where(:user_id => current_user.id, :following_id => user).first, :method => :delete  %></li>
+        <% else %>
+          <li><%= link_to user.username, user_path(user.id) %> <%= link_to "Follow", followships_path(:following_id => user), :method => :post %></li>
+        <% end %> 
       <% end %> 
     <% end %> 
-  <% end %> 
-<% end %>
+  <% end %>
+</ul>
