@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @followships = Followship.all
+    @follow_list = current_user.followships.pluck(:following_id)
   end
 
   def destroy
