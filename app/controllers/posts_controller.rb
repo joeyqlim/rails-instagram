@@ -40,7 +40,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    # @comments = Comment.all
+    @comment = Comment.new
   end
 
   private

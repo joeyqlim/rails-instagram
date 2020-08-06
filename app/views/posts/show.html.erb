@@ -14,8 +14,16 @@
   </div>
   <div class="col-md-6">
     <div>
-      <%= link_to "New Comment", new_post_comment_path(@post), class: "btn btn-secondary" %>
+      <%= form_for [@post, @comment] do |f| %>
+        <div class="form-row">
+          <%= f.label :content, "Comment: " %>
+          <%= f.text_area :content, placeholder: "...", :cols => 100, :rows => 10 %>
+        </div>
+        <br>
+        <%= f.submit "Submit"%>
+      <% end %>
     </div>
+  </div>
     <table class="table mt-4">
       <tr>
         <td>comment</td>
