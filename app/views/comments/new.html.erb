@@ -1,11 +1,24 @@
 <h1>Comments#new</h1>
 <p>Find me in app/views/comments/new.html.erb</p>
+<div class="container">
+  <div class="col-md-6">
+      <p><strong><%= link_to @post.user.username, user_path(@post.user.id) %></strong></p>
+      <%= image_tag @post.main_image.variant(resize_to_limit: [500, 500]) %>
+      <p>"<%= @post.content %>"</p>
 
-<%= form_for [@post, @comment] do |f| %>
-  <div class="form-row">
-    <%= f.label :content, "Comment"%>
-    <%= f.text_field :content %>
+      <% @post.tags.each do |tag| %>
+        <%= tag.name %>
+      <% end %>
+      
   </div>
-  
-  <%= f.submit %>
-<% end %>
+  <div class="col-md-6">
+    <%= form_for [@post, @comment] do |f| %>
+      <div class="form-row">
+        <%= f.label :content, "Comment: " %>
+        <%= f.text_area :content, placeholder: "...", :cols => 100, :rows => 10 %>
+      </div>
+      <br>
+      <%= f.submit "Submit"%>
+    <% end %>
+  </div>
+</div>
