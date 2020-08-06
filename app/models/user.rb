@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :posts
   
+  has_many :comments, through: :post
+
   has_many :followships
   has_many :followings, :through => :followships
   has_many :inverse_followships, :class_name => "Followship", :foreign_key => "following_id"
