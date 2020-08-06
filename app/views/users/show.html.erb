@@ -46,12 +46,14 @@
 <div class="col-8 d-flex flex-wrap">
 <% @user.posts.each do |p| %>
   <div class="border col-4 p-2 mx-1 text-center">
+    <%= link_to post_path(p) do %>
     <%= image_tag p.main_image.variant(resize_to_limit: [200, 200]) %>
     <div class="d-block">
     <p>"<%= p.content %>"</p>
     <p>Posted by <%= p.user.firstname %></p>
   </div>
   </div>
+<% end %>
 <% end %>
 </div>
 </div>
