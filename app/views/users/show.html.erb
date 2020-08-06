@@ -49,6 +49,11 @@
     <%= image_tag p.main_image.variant(resize_to_limit: [200, 200]) %>
     <div class="d-block">
     <p>"<%= p.content %>"</p>
+
+    <% p.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
+    
     <p>Posted by <%= p.user.firstname %></p>
   </div>
   </div>
