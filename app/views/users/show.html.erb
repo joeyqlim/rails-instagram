@@ -1,47 +1,45 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-
-<div class="row">
-<div class="col-3">
-<h4><%= @user.username %></h4>
-<% if current_user.id != @user.id %>
-    <% if current_user.followships.length == 0 %>
-        <p><%= link_to "Follow", followships_path(:following_id => @user.id), :method => :post %></p>
-    <% else %>
-      <% if @follow_list.include? @user.id %>
-        <p><%= link_to "Unfollow", @followships.where(:user_id => current_user.id, :following_id => @user.id).first, :method => :delete  %></p>
-      <% else %>
-        <p><%= link_to "Follow", followships_path(:following_id => @user.id), :method => :post %></p>
-      <% end %> 
-    <% end %> 
-  <% end %> 
-<% if current_user.id == @user.id %>
-<%= link_to "Edit Bio", edit_user_path(current_user), class: "btn btn-warning" %>
-<% end %>
-<p><em><%= @user.biography %></em></p>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <h4><p><strong><%= link_to @user.username, user_path(@user.id) %></strong></p></h4>
+      <% if current_user.id != @user.id %>
+          <% if current_user.followships.length == 0 %>
+              <p><%= link_to "Follow", followships_path(:following_id => @user.id), :method => :post %></p>
+          <% else %>
+            <% if @follow_list.include? @user.id %>
+              <p><%= link_to "Unfollow", @followships.where(:user_id => current_user.id, :following_id => @user.id).first, :method => :delete  %></p>
+            <% else %>
+              <p><%= link_to "Follow", followships_path(:following_id => @user.id), :method => :post %></p>
+            <% end %> 
+          <% end %> 
+        <% end %> 
+      <% if current_user.id == @user.id %>
+      <%= link_to "Edit Bio", edit_user_path(current_user), class: "btn btn-warning" %>
+      <% end %>
+      <p><em><%= @user.biography %></em></p>
 
 
-<h6>Following</h6>
-<ul>
-  <% for followship in @user.followships %>
-    <li>
-    <%= link_to followship.following.username, user_path(followship.following.id) %>
-    <% if current_user.id == @user.id %>
-    <%= link_to "Unfollow", followship, :method => :delete %>
-    <% end %>
-    </li>
-  <% end %>
-</ul>
+      <h6>Following</h6>
+      <ul>
+        <% for followship in @user.followships %>
+          <li>
+          <%= link_to followship.following.username, user_path(followship.following.id) %>
+          <% if current_user.id == @user.id %>
+          <%= link_to "Unfollow", followship, :method => :delete %>
+          <% end %>
+          </li>
+        <% end %>
+      </ul>
 
-<h6>Followers</h6>
-<ul>
-  <% for following in @user.inverse_followings %>
-    <li>
-    <%= link_to following.username, user_path(following.id) %>
-    </li>
-  <% end %>
-</ul>
-</div>
+      <h6>Followers</h6>
+      <ul>
+        <% for following in @user.inverse_followings %>
+          <li>
+          <%= link_to following.username, user_path(following.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
 
 <div class="col-8 d-flex flex-wrap">
 <% @user.posts.reverse.each do |p| %>
@@ -62,4 +60,5 @@
 
 <% end %>
 </div>
+
 </div>

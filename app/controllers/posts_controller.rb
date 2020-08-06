@@ -41,6 +41,8 @@ class PostsController < ApplicationController
   def show
     # @posts = Post.all
     @post = Post.find(params[:id])
+    @followships = Followship.all
+    @follow_list = current_user.followships.pluck(:following_id)
     # @comments = Comment.all
   end
 
