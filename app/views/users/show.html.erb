@@ -4,6 +4,17 @@
 <div class="row">
 <div class="col-3">
 <h4><%= @user.username %></h4>
+<% if current_user.id != @user.id %>
+    <% if current_user.followships.length == 0 %>
+        <p><%= link_to "Follow", followships_path(:following_id => @user.id), :method => :post %></p>
+    <% else %>
+      <% if @follow_list.include? @user.id %>
+        <p><%= link_to "Unfollow", @followships.where(:user_id => current_user.id, :following_id => @user.id).first, :method => :delete  %></p>
+      <% else %>
+        <p><%= link_to "Follow", followships_path(:following_id => @user.id), :method => :post %></p>
+      <% end %> 
+    <% end %> 
+  <% end %> 
 <% if current_user.id == @user.id %>
 <%= link_to "Edit Bio", edit_user_path(current_user), class: "btn btn-warning" %>
 <% end %>
