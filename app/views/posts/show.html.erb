@@ -1,2 +1,25 @@
 <h1>Posts#show</h1>
 <p>Find me in app/views/posts/show.html.erb</p>
+<div class="container">
+  <div class="col-md-6">
+    <%= image_tag @post.main_image.variant(resize_to_limit: [500, 500]) %>
+    <p>"<%= @post.content %>"</p>
+  </div>
+  <div class="col-md-6">
+    <div>
+      <%= link_to "New Comment", new_post_comment_path(@post), class: "btn btn-secondary" %>
+    </div>
+    <table class="table mt-4">
+      <tr>
+        <td>comment</td>
+        <td>by</td>
+      </tr>
+      <% @post.comments.each do |comment| %>
+        <tr>
+          <td><%= comment.content %></td>
+          <td>@<%= comment.user.username %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
