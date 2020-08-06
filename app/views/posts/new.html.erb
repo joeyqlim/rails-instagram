@@ -1,6 +1,12 @@
 <h1>Posts#new</h1>
 <p>Find me in app/views/posts/new.html.erb</p>
 <h2>Create a new post</h2>
+<% if @post.errors.any? %>
+  <%= pluralize(@post.errors.count, "error") %>
+    <% @post.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger"> <%= message %> </div>
+    <% end %>
+<% end %>
 <%= form_for [@user, @post] do |f| %>
     <div class="form-row">
         <%= f.label :main_image, "Upload Image"%>
@@ -9,6 +15,10 @@
     <div class="form-row">
         <%= f.label :content, "Caption"%>
         <%= f.text_field :content %>
+    </div>
+    <div class="form-row">
+        <%= f.label :tag_list, "Hashtags"%>
+        <%= f.text_field :tag_list %>
     </div>
     
     <%= f.submit %>
