@@ -41,7 +41,7 @@
       </ul>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 mx-auto">
     <p><strong><%= link_to @post.user.username, user_path(@post.user.id) %></strong></p>
     <%= image_tag @post.main_image.variant(resize_to_limit: [500, 500]) %>
     <p>"<%= @post.content %>"</p>
@@ -51,7 +51,7 @@
     <% end %>
     
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 mx-auto">
     <div>
       <%= form_for [@post, @comment] do |f| %>
         <div class="form-row">
@@ -63,7 +63,7 @@
       <% end %>
     </div>
   </div>
-      <table class="table mt-4">
+      <table class="table table-sm mt-4">
 
         <tr>
           <td>comment</td>
