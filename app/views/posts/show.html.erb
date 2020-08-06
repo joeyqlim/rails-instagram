@@ -1,8 +1,47 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
-
 <div class="container">
-  <div class="col-md-6">
+  <div class="row">
+
+    <div class="col-3">
+      <h4><p><strong><%= link_to @post.user.username, user_path(@post.user.id) %></strong></p></h4>
+      <% if current_user.id != @post.user.id %>
+          <% if current_user.followships.length == 0 %>
+              <p><%= link_to "Follow", followships_path(:following_id => @post.user.id), :method => :post %></p>
+          <% else %>
+            <% if @follow_list.include? @post.user.id %>
+              <p><%= link_to "Unfollow", @followships.where(:user_id => current_user.id, :following_id => @post.user.id).first, :method => :delete  %></p>
+            <% else %>
+              <p><%= link_to "Follow", followships_path(:following_id => @post.user.id), :method => :post %></p>
+            <% end %> 
+          <% end %> 
+        <% end %> 
+      <% if current_user.id == @post.user.id %>
+      <%= link_to "Edit Bio", edit_user_path(current_user), class: "btn btn-warning" %>
+      <% end %>
+      <p><em><%= @post.user.biography %></em></p>
+
+      <h6>Following</h6>
+      <ul>
+        <% for followship in @post.user.followships %>
+          <li>
+          <%= link_to followship.following.username, user_path(followship.following.id) %>
+          <% if current_user.id == @post.user.id %>
+          <%= link_to "Unfollow", followship, :method => :delete %>
+          <% end %>
+          </li>
+        <% end %>
+      </ul>
+
+      <h6>Followers</h6>
+      <ul>
+        <% for following in @post.user.inverse_followings %>
+          <li>
+          <%= link_to following.username, user_path(following.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-md-6 mx-auto">
     <p><strong><%= link_to @post.user.username, user_path(@post.user.id) %></strong></p>
     <%= image_tag @post.main_image.variant(resize_to_limit: [500, 500]) %>
     <p>"<%= @post.content %>"</p>
@@ -12,21 +51,33 @@
     <% end %>
     
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 mx-auto">
     <div>
-      <%= link_to "New Comment", new_post_comment_path(@post), class: "btn btn-secondary" %>
-    </div>
-    <table class="table mt-4">
-      <tr>
-        <td>comment</td>
-        <td>by</td>
-      </tr>
-      <% @post.comments.each do |comment| %>
-        <tr>
-          <td><%= comment.content %></td>
-          <td>@<%= comment.user.username %></td>
-        </tr>
+      <%= form_for [@post, @comment] do |f| %>
+        <div class="form-row">
+          <%= f.label :content, "Comment: " %>
+          <%= f.text_area :content, placeholder: "...", :cols => 100, :rows => 10 %>
+        </div>
+        <br>
+        <%= f.submit "Submit"%>
       <% end %>
-    </table>
+    </div>
+  </div>
+      <table class="table table-sm mt-4">
+
+        <tr>
+          <td>comment</td>
+          <td>by</td>
+        </tr>
+
+          <% @post.comments.each do |comment| %>
+            <tr>
+              <td><%= comment.content %></td>
+              <td>@<%= comment.user.username %></td>
+            </tr>
+          <% end %>
+        </table>
+    </div>
+
   </div>
 </div>
