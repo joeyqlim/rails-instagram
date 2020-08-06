@@ -2,6 +2,7 @@
 <p>Find me in app/views/posts/show.html.erb</p>
 <div class="container">
   <div class="col-md-6">
+    <p><strong><%= link_to @post.user.username, user_path(@post.user.id) %></strong></p>
     <%= image_tag @post.main_image.variant(resize_to_limit: [500, 500]) %>
     <p>"<%= @post.content %>"</p>
   </div>
