@@ -39,6 +39,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    # @posts = Post.all
     @post = Post.find(params[:id])
     @followships = Followship.all
     @follow_list = current_user.followships.pluck(:following_id)
@@ -48,6 +49,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :user_id, :main_image)
+    params.require(:post).permit(:content, :user_id, :main_image, :tag_list)
   end 
 end
