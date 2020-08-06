@@ -1,9 +1,9 @@
 # Ruby on Rails Instagram Clone
 
-<img src="https://i.imgur.com/5Z3cmGv.png" />
+<img src="https://i.imgur.com/OI6dbYk.png" />
 
 ## ERD
-<img src="https://i.imgur.com/PdB9LB8.png" />
+<img src="https://i.imgur.com/sgUW4Xb.png" />
 
 ### Trello board
 https://trello.com/b/aY2WcHQw/rails-challenge
